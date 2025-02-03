@@ -3,29 +3,30 @@ package dev.xamanicolas.pizzaria_backend.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Order {
+public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(unique = true, nullable = false)
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "customerOrder", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PizzaOrder> orders;
     private BigDecimal total;
 
-    protected Order() {}
+    protected CustomerOrder() {}
 
-    public Order(Customer customer, List<PizzaOrder> orders) {
+    public CustomerOrder(Customer customer, List<PizzaOrder> orders) {
         this.customer = customer;
         this.orders = orders;
+        calculateTotal();
     }
 
     public Long getId() {
@@ -60,17 +61,18 @@ public class Order {
         this.total = total;
     }
 
-    public BigDecimal total(){
-        List<BigDecimal> totals = this.orders.stream().map(x -> x.subTotal()).toList();
-        return totals.stream().reduce((acc, current) -> acc.add(current)).orElse(BigDecimal.ZERO);
+    public void calculateTotal(){
+        setTotal(this.orders.stream()
+                .map(x -> x.subTotal())
+                .reduce(BigDecimal.ZERO, BigDecimal::add));
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(id, order.id);
+        CustomerOrder customerOrder = (CustomerOrder) o;
+        return Objects.equals(id, customerOrder.id);
     }
 
     @Override
