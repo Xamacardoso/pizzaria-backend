@@ -2,9 +2,11 @@ package dev.xamanicolas.pizzaria_backend.mappers;
 
 import dev.xamanicolas.pizzaria_backend.dto.PizzaDTO;
 import dev.xamanicolas.pizzaria_backend.entities.Pizza;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PizzaMapper {
-    public static PizzaDTO toDTO(Pizza pizza){
+    public PizzaDTO toDTO(Pizza pizza){
         return new PizzaDTO(
                 pizza.getId(),
                 pizza.getFlavor(),
@@ -13,7 +15,7 @@ public class PizzaMapper {
                 );
     }
 
-    public static Pizza toEntity(PizzaDTO pizzaDTO){
+    public Pizza toEntity(PizzaDTO pizzaDTO){
         return new Pizza(
                 pizzaDTO.id(),
                 pizzaDTO.flavor(),

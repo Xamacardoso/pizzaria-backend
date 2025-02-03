@@ -12,12 +12,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class PizzaOrderMapper {
 
-    @Autowired
     private CustomerOrderRepository customerOrderRepository;
-    @Autowired
     private PizzaRepository pizzaRepository;
 
-    public static PizzaOrderDTO toDTO(PizzaOrder pizzaOrder) {
+    public PizzaOrderMapper(CustomerOrderRepository customerOrderRepository, PizzaRepository pizzaRepository) {
+        this.customerOrderRepository = customerOrderRepository;
+        this.pizzaRepository = pizzaRepository;
+    }
+
+    public PizzaOrderDTO toDTO(PizzaOrder pizzaOrder) {
         return new PizzaOrderDTO(
                 pizzaOrder.getId(),
                 pizzaOrder.getPizza().getId(),

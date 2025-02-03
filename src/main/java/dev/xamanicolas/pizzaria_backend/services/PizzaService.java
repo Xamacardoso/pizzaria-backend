@@ -13,15 +13,17 @@ import java.util.List;
 public class PizzaService {
 
     private final PizzaRepository pizzaRepository;
+    private final PizzaMapper pizzaMapper;
 
-    public PizzaService(PizzaRepository pizzaRepository) {
+    public PizzaService(PizzaRepository pizzaRepository, PizzaMapper pizzaMapper) {
         this.pizzaRepository = pizzaRepository;
+        this.pizzaMapper = pizzaMapper;
     }
 
     @Transactional(readOnly = true)
     public List<PizzaDTO> findAll(){
         List<Pizza> pizzas = pizzaRepository.findAll();
-        List<PizzaDTO> pizzaDTOs = pizzas.stream().map(PizzaMapper::toDTO).toList();
+        List<PizzaDTO> pizzaDTOs = pizzas.stream().map(pizzaMapper::toDTO).toList();
         return pizzaDTOs;
     }
 }
