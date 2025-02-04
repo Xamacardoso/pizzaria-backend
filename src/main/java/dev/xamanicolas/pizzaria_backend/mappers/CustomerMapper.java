@@ -2,10 +2,12 @@ package dev.xamanicolas.pizzaria_backend.mappers;
 
 import dev.xamanicolas.pizzaria_backend.dto.CustomerDTO;
 import dev.xamanicolas.pizzaria_backend.entities.Customer;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CustomerMapper {
 
-    public static CustomerDTO toDTO(Customer customer) {
+    public CustomerDTO toDTO(Customer customer) {
         return new CustomerDTO(
                 customer.getId(),
                 customer.getCustomerName(),
@@ -18,7 +20,7 @@ public class CustomerMapper {
         );
     }
 
-    public static Customer toEntity(CustomerDTO customerDTO) {
+    public Customer toEntity(CustomerDTO customerDTO) {
         return new Customer(
                 customerDTO.id(),
                 customerDTO.customerName(),

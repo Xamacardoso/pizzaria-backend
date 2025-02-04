@@ -14,7 +14,7 @@ public class CustomerOrderRequestMapper {
 
     private final CustomerRepository customerRepository;
     private final PizzaOrderMapper pizzaOrderMapper;
-    
+
     public CustomerOrderRequestMapper(CustomerRepository customerRepository, PizzaOrderMapper pizzaOrderMapper) {
         this.customerRepository = customerRepository;
         this.pizzaOrderMapper = pizzaOrderMapper;
