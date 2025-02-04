@@ -6,7 +6,7 @@ import java.util.List;
 public record CustomerOrderResponseDTO(
         Long id,
         String customerName,
-        List<PizzaOrderDTO> items,
+        List<PizzaOrderResponseDTO> items,
         BigDecimal total
 ) {
 

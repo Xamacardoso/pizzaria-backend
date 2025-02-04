@@ -4,6 +4,6 @@ import java.util.List;
 
 public record CustomerOrderRequestDTO(
         Long customerId,
-        List<PizzaOrderDTO> orders
+        List<PizzaOrderRequestDTO> orders
 ) {
 }

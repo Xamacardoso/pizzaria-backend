@@ -3,6 +3,7 @@ package dev.xamanicolas.pizzaria_backend.controllers;
 import dev.xamanicolas.pizzaria_backend.dto.PizzaDTO;
 import dev.xamanicolas.pizzaria_backend.services.PizzaService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,4 +23,6 @@ public class PizzaController {
     public List<PizzaDTO> findAll(){
         return pizzaService.findAll();
     }
+
+
 }

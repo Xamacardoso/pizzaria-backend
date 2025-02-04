@@ -1,11 +1,12 @@
 package dev.xamanicolas.pizzaria_backend.controllers;
 
+import dev.xamanicolas.pizzaria_backend.dto.CustomerOrderRequestDTO;
 import dev.xamanicolas.pizzaria_backend.dto.CustomerOrderResponseDTO;
 import dev.xamanicolas.pizzaria_backend.services.CustomerOrderService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -21,5 +22,13 @@ public class CustomerOrderController {
     @GetMapping
     public List<CustomerOrderResponseDTO> findAll(){
         return customerOrderService.findAll();
+    }
+
+    @PostMapping(value = "/create")
+    public ResponseEntity<CustomerOrderResponseDTO> insert(@RequestBody CustomerOrderRequestDTO dto){
+        CustomerOrderResponseDTO newOrder = customerOrderService.insert(dto);
+        return ResponseEntity
+                .created(URI.create("/orders" + newOrder.id()))
+                .body(newOrder);
     }
 }

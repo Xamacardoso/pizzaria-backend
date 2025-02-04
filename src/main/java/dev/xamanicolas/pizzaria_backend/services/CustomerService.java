@@ -28,6 +28,11 @@ public class CustomerService {
         return customerDTOs;
     }
 
+    @Transactional(readOnly = true)
+    public Customer findById(Long id){
+        return customerRepository.findById(id).orElse(null);
+    }
+
     @Transactional
     public CustomerDTO insert(CustomerDTO customerDTO) {
         Customer customer = customerMapper.toEntity(customerDTO);

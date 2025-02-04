@@ -16,8 +16,10 @@ public class CustomerOrder {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
     @OneToMany(mappedBy = "customerOrder", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PizzaOrder> orders;
+
     private BigDecimal total;
 
     protected CustomerOrder() {}
@@ -26,6 +28,10 @@ public class CustomerOrder {
         this.customer = customer;
         this.orders = orders;
         calculateTotal();
+    }
+
+    public CustomerOrder(Customer customer) {
+        this.customer = customer;
     }
 
     public Long getId() {

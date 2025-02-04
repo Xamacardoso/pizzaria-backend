@@ -8,7 +8,7 @@ services:
     container_name: pizzaria-dev-postgresql
     environment:
       POSTGRES_USER: myuser
-      POSTGRES_DB: mydatabase
+      POSTGRES_DB: pizzaria-db
       POSTGRES_PASSWORD: mysecurepassword
     ports:
       - "5433:5432"

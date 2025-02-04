@@ -13,7 +13,7 @@ public class PizzaOrder {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "order_id")
     private CustomerOrder customerOrder;
 
     @ManyToOne
@@ -25,6 +25,11 @@ public class PizzaOrder {
 
     public PizzaOrder(CustomerOrder customerOrder, Pizza pizza, Long quantity) {
         this.customerOrder = customerOrder;
+        this.pizza = pizza;
+        this.quantity = quantity;
+    }
+
+    public PizzaOrder(Pizza pizza, Long quantity) {
         this.pizza = pizza;
         this.quantity = quantity;
     }
